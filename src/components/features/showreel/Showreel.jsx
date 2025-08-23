@@ -134,7 +134,7 @@ export default function Showreel() {
           playsInline
           preload="metadata"
           // supply a lightweight poster for fast first paint (replace path)
-          poster="/videos/showreel_poster.jpg"
+          poster="/videos/showreel_poster.webp"
           // keep UX clean; we provide our own sound button
           controls={false}
           // avoids PiP button on some browsers
@@ -142,7 +142,6 @@ export default function Showreel() {
         >
           {/* Prefer AV1/VP9 WebM first, then H.264 MP4 fallback */}
           <source src="/videos/showreel.webm" type="video/webm" />
-          <source src="/videos/showreel.mp4" type="video/mp4" />
         </video>
 
         {/* Sound toggle button */}
