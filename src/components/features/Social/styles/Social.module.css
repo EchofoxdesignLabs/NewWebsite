@@ -1,0 +1,144 @@
+.section {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  color: #0a0a0a;
+  
+}
+
+/* STICKY viewport that pins while peeling/restacking */
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  isolation: isolate;
+  pointer-events: none;
+  
+}
+
+/* header layer (title + kicker) */
+.header {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* kicker top-left */
+.kicker {
+  position: absolute;
+  top: 32px;
+  left: 6vw;
+  font-size: 28px;
+  letter-spacing: 0.05em;
+  color: #222;
+  margin: 0;
+}
+.dot { display:inline-block; width:8px; height:8px; margin-right:10px; border-radius:50%; background:#ff4b2b; vertical-align:middle; }
+
+/* big title centered behind the deck */
+.title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-heading, inherit);
+  font-weight: 800;
+  font-size: clamp(64px, 10vw, 240px);
+  user-select: none;
+  line-height: 0.92;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* make the final dot red */
+.title .ch:last-child { color: #ff4b2b; }
+
+/* per-letter spans used by the bend animation */
+.ch { display: inline-block; will-change: transform; }
+
+/* deck centered above the title */
+.deck {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(20vw, 520px);
+  aspect-ratio: 160 / 203;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* each card sits perfectly overlapped for a clean stack */
+.card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #f4f4f4;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  transform-style: preserve-3d;
+  will-change: transform, opacity, box-shadow;
+  pointer-events: auto;
+}
+.card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* badge shaped like your figma pill (icon left + label) */
+.badge {
+  position: absolute;
+  left: 12px;
+  bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 12px;
+  /* subtle translucent dark backdrop so it reads on any image */
+  background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.12));
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+  pointer-events: none; /* purely decorative */
+}
+
+/* left icon in badge - if you add icon files they will appear */
+.badgeIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* fallback small circle if no icon asset */
+  background-color: rgba(255,255,255,0.9);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* label inside badge */
+.badgeLabel { color: #fff; }
+
+/* Hide popped card fully and prevent pointer events */
+.isGone {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-120vh) !important;
+  pointer-events: none !important;
+  will-change: auto;
+}
+
+/* section anchors (flow) */
+.anchors { display: block; }
+.anchor  { height: 100vh; }
+
+@media (max-width: 900px) {
+  .deck { width: min(88vw, 520px); }
+  .card { border-radius: 20px; }
+  .title { font-size: clamp(34px, 11.5vw, 86px); }
+}

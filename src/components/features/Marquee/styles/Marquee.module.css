@@ -1,0 +1,117 @@
+/* Light theme + seamless loop */
+
+.marqueeSection {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: clamp(28px, 4vw, 48px) 0;
+}
+
+/* theme variables */
+.light {
+  --bg: #ffffff;
+  --mask-bg: #ffffff;
+  --logo-opacity: 0.9;
+  --logo-saturate: 0;       /* grayscale */
+  --logo-contrast: 1;
+  --logo-brightness: 0.35;  /* dark gray logos */
+}
+.marqueeSection { background: var(--bg, #fff); }
+
+.inner { width: 100%; margin: 0 auto; }
+.rows { display: grid; gap: clamp(12px, 2vw, 20px); }
+
+/* Pause animations when out of view (IO toggles .isVisible) */
+.marqueeSection :global(*) { animation-play-state: paused; }
+.isVisible :global(*)       { animation-play-state: running; }
+
+/* ROW */
+.row {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  min-height: var(--item-height, 88px);
+}
+
+/* edge fades */
+.maskLeft,
+.maskRight {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: min(14%, 160px);
+  z-index: 2; pointer-events: none;
+}
+.maskLeft  { left:  0; background: linear-gradient(to right, var(--mask-bg, #fff) 0%, rgba(255,255,255,0) 70%); }
+.maskRight { right: 0; background: linear-gradient(to left,  var(--mask-bg, #fff) 0%, rgba(255,255,255,0) 70%); }
+
+/* SCROLLER: two identical .track siblings, animated as one */
+.scroller {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;            /* fit to content width */
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translate3d(0,0,0);
+}
+
+/* The loop: translate exactly half (because we have two identical tracks) */
+.dirLeft  .scroller { animation: scroll-left  var(--duration, 26s) linear infinite; }
+.dirRight .scroller { animation: scroll-right var(--duration, 26s) linear infinite; }
+
+/* pause on hover (optional) */
+.pauseOnHover:hover .scroller { animation-play-state: paused; }
+
+/* TRACK: a single list of logos */
+.track {
+  display: inline-flex;      /* inline so width is exact content width */
+  gap: var(--gap, 96px);
+  align-items: center;
+  width: max-content;        /* critical: no flex stretching */
+}
+.endGap {
+  flex: 0 0 auto;
+  width: var(--gap, 80px);
+  height: 1px; /* just to exist; invisible */
+}
+
+/* ITEMS & LOGOS */
+.item {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--item-height, 88px);
+}
+
+.item img {
+  display: block;
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  opacity: var(--logo-opacity, 0.9);
+  filter:
+    saturate(var(--logo-saturate, 0))
+    contrast(var(--logo-contrast, 1))
+    brightness(var(--logo-brightness, 0.35));
+  transition: transform 220ms ease, opacity 220ms ease, filter 220ms ease;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.item img:hover { transform: translateY(-2px); opacity: 1; }
+
+/* KEYFRAMES with translate3d to avoid subpixel rounding jumps */
+@keyframes scroll-left  {
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(-50%,0,0); }
+}
+@keyframes scroll-right {
+  from { transform: translate3d(-50%,0,0); }
+  to   { transform: translate3d(0,0,0); }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .dirLeft  .scroller,
+  .dirRight .scroller { animation: none !important; transform: translate3d(0,0,0) !important; }
+}

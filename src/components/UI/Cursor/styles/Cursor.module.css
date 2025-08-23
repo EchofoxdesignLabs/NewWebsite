@@ -1,0 +1,38 @@
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  z-index: 99999;
+  will-change: transform, opacity;
+  transform: translate3d(-9999px, -9999px, 0);
+  transition: opacity 160ms linear;
+  display: block;
+  opacity: 0; /* becomes 1 on first mousemove */
+}
+
+/* SVG styling - keep circles same size visually */
+.cursorSvg {
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* outer ring stroke style (slightly thicker) */
+.outer {
+  stroke: #ff4b2b;
+  stroke-opacity: 1;
+  mix-blend-mode: normal;
+  transform-origin: 50% 50%;
+  transition: stroke-width 200ms ease;
+}
+
+/* inner ring (same radius) */
+.inner {
+  stroke: #ff4b2b;
+  stroke-opacity: 1;
+  transform-origin: 50% 50%;
+  transition: transform 120ms ease;
+}
+
+/* on hover the GSAP timeline applies the filter; CSS remains simple */

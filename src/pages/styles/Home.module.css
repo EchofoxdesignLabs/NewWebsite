@@ -1,0 +1,12 @@
+/* simple scoped layout for the home page */
+
+
+/* lightweight fallback style for lazy-loaded sections */
+.sectionFallback {
+  height: 240px;
+  display: grid;
+  place-items: center;
+  color: rgba(255,255,255,0.6);
+  background: transparent;
+  font-size: 14px;
+}

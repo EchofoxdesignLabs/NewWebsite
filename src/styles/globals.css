@@ -1,0 +1,27 @@
+/* Add these font definitions at the top of your file */
+@font-face {
+  font-family: 'Otterco';
+  src: url('/fonts/OttercoDisplay-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Redcollar';
+  src: url('/fonts/Redcollar.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  --hero-bg: #fafafa;
+  --text-color: #0b0b0b;
+  --muted: rgba(0,0,0,0.65);
+  --accent: #ff2600;
+  --font-heading: 'Redcollar', sans-serif; /* Use Redcollar for main headings */
+  --font-body: 'Otterco', sans-serif; /* Use Otterco for body/nav text */
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; font-family: var(--font-body); /* Apply the new body font */ }
+
+

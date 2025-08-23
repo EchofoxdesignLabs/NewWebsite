@@ -1,0 +1,145 @@
+:root{
+  --testimonial-max-width: 1280px;
+  --quote-font-size: clamp(28px, 3.4vw, 44px);
+  --avatar-size: 320px;
+  --avatar-size-mobile: 180px;
+  --wrap-min-h: 560px;        /* <- keeps section stable on desktop */
+}
+
+.section{
+  position:relative;
+  width:100%;
+  background:#0b0b0b;
+  color:#fff;
+  padding:120px 6vw;
+  box-sizing:border-box;
+}
+.inner{ max-width:var(--testimonial-max-width); margin:0 auto; position:relative; }
+
+/* ===== GRID LAYOUT (2 cols × 2 rows) ===== */
+.wrap{
+  display:grid;
+  grid-template-columns: 1fr minmax(340px, auto);
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "quote    avatar"
+    "footer   controls";
+  column-gap: 56px;
+  row-gap: 28px;
+  align-items: center;          /* row 1 vertical centering */
+  min-height: var(--wrap-min-h);
+  position:relative;
+}
+
+.quoteMark{
+  position:absolute;
+  left:0; top:48px;
+  font-size:72px;
+  opacity:.4;
+  color:rgb(255, 255, 255);
+  transform:translateX(-8px);
+  pointer-events:none;
+  z-index:1;
+}
+
+.quote{ grid-area: quote; padding-right:40px; z-index:2; }
+.quoteText{
+  font-family:'Redcollar',sans-serif;
+  font-weight:700;
+  font-size:var(--quote-font-size);
+  line-height:1.05;
+  margin:0;
+  color:#fff;
+}
+
+/* avatar column */
+.avatarCol{ grid-area: avatar; display:flex; flex-direction:column; align-items:center; }
+.avatarWrap{
+  width:var(--avatar-size);
+  height:var(--avatar-size);
+  border-radius:50%;
+  overflow:hidden;
+  box-shadow:0 18px 48px rgba(0,0,0,.6);
+}
+.avatar{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Row-2 (left) becomes a 2-row grid: pips on top, person below */
+.footer{
+  grid-area: footer;
+  display: grid;
+  grid-template-rows: auto auto;   /* row1: pips, row2: name/title */
+  align-items: end;                 /* bottom aligns to the row baseline */
+  gap: 10px 0;
+}
+
+/* pips sit on the top row */
+.pips{
+  align-self: start;                /* top of the footer block */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.dot{
+  width:10px; height:6px; border-radius:999px;
+  background:rgba(255,255,255,.25);
+  border:none; cursor:pointer;
+  transition:width .28s, background .28s, transform .18s;
+}
+.dot:hover{ transform:scale(1.12); }
+
+/* person */
+/* name/title sit on the bottom row */
+.person{
+  align-self: end;                  /* bottom -> aligns with controls */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.name{ font-weight:700; font-size:1.4rem; color:#fff; }
+.title{ font-size:.95rem; color:rgba(255,255,255,.6); }
+
+/* make the buttons share that same baseline on the right */
+.controls{
+  grid-area: controls;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  align-self: end;                  /* <- baseline with .person */
+  justify-self: center;
+}
+/* keep the white border you asked for */
+.ctrl{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  transition: transform .18s, background .18s;
+}
+.ctrl:hover{ transform:translateY(-3px); background:rgba(255,255,255,.06); }
+
+/* kicker (unchanged) */
+.kicker{ color:rgba(255,255,255,.9); margin:0 0 30px; font-size:14px; letter-spacing:.04em; }
+.dotSmall{ display:inline-block; width:8px; height:8px; background:#ff4b2b; border-radius:50%; margin-right:10px; vertical-align:middle; }
+
+/* responsive */
+@media (max-width: 900px){
+  .wrap{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+      "quote"
+      "avatar"
+      "controls"
+      "footer";
+    row-gap:22px;
+    min-height: unset;         /* let it flow on mobile */
+  }
+  .avatarWrap{ width:var(--avatar-size-mobile); height:var(--avatar-size-mobile); margin:0 auto; }
+  .quote{ padding-right:0; text-align:center; }
+  .footer{ justify-content:center; }
+}

@@ -1,0 +1,201 @@
+:root{
+  --accent: #ff4b2b;
+  --anim-dur: 360ms;
+  --underline-h: 4px;
+  --image-height: 340px; /* change this to reduce image size */
+  --cta-padding-x: 20px;
+  --cta-padding-y: 8px;
+}
+
+/* outer */
+.blogs {
+  background: #fff;
+  color: #111;
+  padding: 72px 6vw;
+  box-sizing: border-box;
+}
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* kicker */
+.kicker {
+  font-size: 14px;
+  margin-bottom: 28px;
+  color: #222;
+  display: flex;
+  align-items: center;
+}
+.dotSmall {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* grid */
+.grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+/* card layout */
+.card{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* image frame */
+.imageWrap{
+  display: block;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(12,12,12,0.06);
+  will-change: transform;
+}
+
+/* image: object-fit cover */
+.image{
+  width: 100%;
+  height: var(--image-height);
+  object-fit: cover;
+  display: block;
+  transform-origin: 50% 50%;
+  transition: transform var(--anim-dur) cubic-bezier(.2,.9,.25,1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* zoom on hover or keyboard focus of the link (touch devices: tap gives focus) */
+.card:hover .image,
+.imageWrap:focus .image,
+.imageWrap:active .image {
+  transform: scale(1.12);
+}
+
+/* body */
+.body { padding: 0; }
+
+/* category */
+.category {
+  font-size: 13px;
+  color: #8b8b8b;
+  margin-bottom: 8px;
+}
+
+/* title and underline behavior */
+.title {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+/* link wrapping title */
+.titleLink {
+  color: #111;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px; /* room for underline */
+  outline: none;
+}
+
+/* underline that grows from center -> right */
+.titleLink::after {
+  content: "";
+  position: absolute;
+  height: var(--underline-h);
+  background: var(--accent);
+  bottom: 0;
+  left: 0;
+  right: 0;                /* span full width of the text */
+  transform-origin: center center;
+  transform: scaleX(0);    /* collapsed */
+  transition: transform var(--anim-dur) cubic-bezier(.2,.9,.25,1), opacity .18s;
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+/* hover/focus expands center -> right (width 50% covers half the text) */
+.titleLink:hover::after,
+.titleLink:focus::after {
+  transform: scaleX(1);
+}
+
+/* meta row */
+.meta{
+  font-size: 13px;
+  color: #7d7d7d;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* CTA centered */
+.ctaWrap {
+  text-align: center;
+  margin-top: 56px;
+}
+
+/* Blog.module.css (add/replace the viewAll block) */
+
+.viewAll {
+  position: relative;
+  display: inline-flex; /* Use flex to center the text */
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  font-weight: 700;
+  font-size: 28px;
+  color: #111;
+  text-decoration: none;
+  line-height: 1;
+  overflow: visible;
+  z-index: 0;
+  transition: color 220ms ease, transform 160ms ease;
+}
+
+.viewAllInner {
+  position: relative;
+  z-index: 2; /* Ensures text is above the SVG stroke */
+  pointer-events: none;
+}
+
+.ctaSvg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1; /* Ensures SVG is behind the text */
+  overflow: visible;
+}
+
+.viewAll:hover,
+.viewAll:focus {
+  transform: translateY(-3px);
+}
+
+/* responsiveness tweaks (optional) */
+@media (max-width: 700px) {
+  .viewAll { font-size: 20px; padding: 6px 12px; }
+}
+/* responsive */
+@media (max-width: 1100px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  :root { --image-height: 300px; }
+}
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr; }
+  :root { --image-height: 220px; }
+  .viewAll { font-size: 20px; }
+  .title { font-size: 20px; }
+}

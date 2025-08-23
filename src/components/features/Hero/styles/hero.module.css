@@ -1,0 +1,112 @@
+/* hero wrapper */
+.heroFullscreen {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--hero-bg); /* fallback */
+}
+
+/* Fullscreen canvas element */
+.canvasFull {
+  position: absolute !important; 
+  inset: 0;               /* top:0; right:0; bottom:0; left:0 */
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 1; /* z-index: 0 can sometimes cause issues, 1 is safer for a background */
+  pointer-events: auto;   /* keep pointer events so fox can react */
+}
+
+/* DOM content container that sits above the canvas */
+.heroContent {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* UPDATED: Change justify-content and add padding-top */
+  justify-content: flex-start;
+  padding-top: 30vh; /* Pushes the text down from the top. Adjust this value (e.g., 25vh, 35vh) as needed. */
+  padding-left: 6vw;
+  padding-right: 6vw;
+  box-sizing: border-box;
+}
+
+/* left column */
+.heroLeft {
+  color: var(--text-color);
+}
+.heroTitle {
+  margin: 0;
+  font-family: var(--font-heading); /* Apply Redcollar font */
+  font-weight: 400; /* Use font's native weight */
+  font-size: clamp(2rem, 10vw, 5rem); /* Adjusted font size */
+  line-height: 0.95; /* Tighter line height */
+  letter-spacing: -0.02em;
+}
+.heroSub {
+  position: absolute; /* Position relative to hero-content */
+  bottom: 40px;
+  right: 6vw; /* Align with page padding */
+  max-width: 500px;
+  text-align: right;
+  font-size: 1.2rem; /* 14px */
+  color: var(--muted);
+  line-height: 1.6;
+}
+.dot { color: var(--accent); }
+
+/* header */
+.siteHeader {
+  position: absolute; 
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center; /* Vertically center items in the header */
+  justify-content: flex-start;
+  padding: 40px 6vw; /* Increased padding */
+  z-index: 40;
+  pointer-events: none;
+  margin: 0 auto;
+}
+.headerLine {
+  flex-grow: 1; /* This makes the div expand to fill space */
+  height: 1px;
+  background-color: #272727;
+  margin: 0 102px; /* Adds a little space on either side of the line */
+}
+.brand, .nav a { pointer-events: auto; cursor: pointer; }
+
+.brand img {
+  height: 24px; /* Adjust height as needed */
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  gap: 32px; /* Adds space between nav items */
+}
+
+.nav a {
+  font-size: 1.2rem; /* 14px */
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text-color);
+  letter-spacing: 2px;
+  /* --- HOVER EFFECT --- */
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: inline-block; /* Needed for transform to work */
+}
+
+.nav a:hover {
+  transform: scale(1.15); /* Zoom in on hover */
+}
+
+/* responsive stack */
+@media (max-width: 900px) {
+  .hero-content { flex-direction: column; padding-top: 76px; }
+  .hero-left { width: 100%; padding: 2rem; order: 0; }
+}

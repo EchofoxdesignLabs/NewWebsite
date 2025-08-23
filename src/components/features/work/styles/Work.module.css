@@ -1,0 +1,81 @@
+/* src/components/features/work/styles/Work.module.css
+   Sticky viewport approach (no global canvas rules, no fixed canvas).
+*/
+
+/* -------- Section wrapper (outer <section>) -------- */
+.workSectionWrapper {
+  position: relative;
+  width: 100%;
+  /* Height is set inline from React: height = pages * 100vh */
+  overflow: visible;
+}
+
+/* -------- Sticky viewport (the pin) -------- */
+/* This element stays pinned for the duration of the section */
+.workStickyViewport {
+  position: sticky;
+  top: 0;               /* adjust if you have a fixed header (e.g., top: 80px) */
+  height: 100vh;        /* viewport-sized area */
+  z-index: 5;           /* below site header (keep header > 5) */
+  pointer-events: none; /* let inner layers decide */
+  isolation: isolate;   /* create a stacking context (safer layering) */
+}
+
+/* Canvas layer fills the sticky viewport */
+.workCanvasLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto; /* allow 3D interactions */
+}
+
+/* Ensure canvas fills */
+.workCanvasLayer canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  object-fit: cover;
+}
+
+/* -------- Overlay inside the sticky viewport -------- */
+.workOverlaySticky {
+  position: relative;   /* relative to sticky viewport */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 6vw;
+  padding-right: 6vw;
+  pointer-events: none; /* default: non-interactive (links below opt-in) */
+  z-index: 10;          /* above canvas inside the sticky viewport */
+}
+.workOverlaySticky * { pointer-events: auto; }
+
+/* -------- Anchors in normal flow (make the section tall) -------- */
+.workAnchors { display: block; }
+.workAnchor {
+  height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* -------- Text styles (your original overlay styles) -------- */
+.textOverlay { position: relative; width: 100%; max-width: 620px; color: white; pointer-events: none; }
+.textContent { opacity: 0; transform: translateY(20px); transition: opacity .45s cubic-bezier(.2,.9,.2,1), transform .45s cubic-bezier(.2,.9,.2,1); }
+.textContent.visible { opacity: 1; transform: translateY(0); }
+
+.productCategory { display:inline-flex; align-items:center; font-family:'OttercoDisplay-Regular',sans-serif; font-size:.9rem; text-transform:lowercase; letter-spacing:1px; margin-bottom:1.2rem; color:rgba(255,255,255,.9); }
+.productCategory::before { content:''; display:inline-block; width:8px; height:8px; background:#ff4b2b; border-radius:50%; margin-right:10px; }
+
+.productTitle { font-family:'Redcollar',sans-serif; font-size:clamp(2.8rem,6vw,4.2rem); margin:0 0 .6rem 0; font-weight:700; line-height:.95; color:#fff; white-space:nowrap; }
+.productDescription { font-family:'OttercoDisplay-Regular',sans-serif; font-size:1rem; line-height:1.6; margin:0 0 2.2rem 0; max-width:38rem; color:rgba(255,255,255,.9); }
+
+.exploreLink { display:inline-block; position:relative; font-family:'Redcollar',sans-serif; font-size:1.05rem; color:#fff; text-decoration:none; padding-bottom:6px; border-bottom:2px solid #ff4b2b; pointer-events:auto; transition:border-bottom-color .35s; }
+.exploreLink::after { content:attr(data-text); position:absolute; inset:0; color:#ff4b2b; clip-path:polygon(0 100%,100% 100%,100% 100%,0 100%); transition:clip-path .35s cubic-bezier(.2,.9,.2,1); }
+.exploreLink:hover { border-bottom-color:transparent; }
+.exploreLink:hover::after { clip-path:polygon(0 0,100% 0,100% 100%,0 100%); }
+
+@media (max-width:900px) {
+  .workOverlaySticky { padding-left: 4vw; padding-right: 4vw; }
+  .productTitle { font-size: clamp(2rem,8vw,3rem); white-space: normal; }
+  .productDescription { max-width: 100%; }
+}

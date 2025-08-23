@@ -1,0 +1,69 @@
+/* src/components/UI.css */
+
+.ui-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allows clicks to go through to the canvas */
+    color: #1a1a1a;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    pointer-events: auto; /* Enable clicks on header elements */
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+nav a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.main-content h1 {
+    font-size: 6vw;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.red-dot {
+    color: #ff4d4d;
+}
+
+.footer-content {
+    align-self: flex-end;
+    text-align: right;
+    max-width: 300px;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+}

@@ -1,0 +1,18 @@
+/* src/layouts/Layout.module.css */
+.pageWrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--page-bg, #fff);
+  color: var(--text-color, #111);
+}
+
+/* main content should take all available space between header/footer */
+.main {
+  flex: 1 1 auto;
+  width: 100%;
+  /* pages usually have their own container padding; keep global padding optional */
+  box-sizing: border-box;
+  /* optional default padding — you can override inside pages */
+  padding: 0;
+}

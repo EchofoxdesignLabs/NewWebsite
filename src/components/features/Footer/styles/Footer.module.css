@@ -1,0 +1,151 @@
+/* src/features/footer/styles/Footer.module.css */
+
+.footer {
+  background: #0b0b0b;
+  color: #fff;
+  padding: 0 6vw;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.contentWrapper {
+  width: 100%;
+  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- TOP ROW --- */
+.mainContent {
+  /* FIXED: Reduced bottom padding to move the sub-footer up */
+  padding: 120px 0 60px 0;
+  display: flex;
+  /* FIXED: Changed from 'center' to 'flex-start' for left alignment */
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.kicker {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #ff4b2b;
+  border-radius: 50%;
+}
+
+/* FIXED: Made the 3D text container significantly larger */
+.connectWrap {
+  width: min(1000px, 80vw);
+  height: 200px;
+  position: relative;
+  /* FIXED: Reduced margin to bring contact info closer */
+  margin-bottom: -16px; 
+  margin-left: 0vw; /* Nudge to align the 'l' with text below */
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+.email, .phone {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+/* --- SEPARATOR --- */
+.separator {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- BOTTOM ROW --- */
+.subFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* FIXED: Increased padding and font size for a bigger feel */
+  padding: 40px 0;
+  font-size: 15px;
+}
+
+.social {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex: 1 1 33.33%;
+  justify-content: flex-start;
+}
+.icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: grid;
+  place-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.icon img {
+  width: 50%; /* Adjust size of icon inside the circle */
+  height: 50%;
+  object-fit: contain;
+  filter:
+    saturate(var(--logo-saturate, 0))
+    contrast(var(--logo-contrast, 1))
+    brightness(var(--logo-brightness, 0.35));
+}
+
+.copy {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  flex: 1 1 33.33%;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+  flex: 1 1 33.33%;
+  justify-content: flex-end;
+}
+.nav a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .mainContent {
+    justify-content: center;
+    text-align: center;
+  }
+  .contactInfo {
+    align-items: center;
+  }
+}
+@media (max-width: 768px) {
+  .subFooter {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .copy { order: 3; }
+  .social { order: 2; }
+  .nav { order: 1; justify-content: center; }
+}

@@ -1,0 +1,127 @@
+/* Services.module.css - scoped to the services component */
+:root {
+  /* tweak these to taste */
+  --services-vertical-padding: 80px; /* change this to increase/decrease spacing */
+  --services-min-height: 80vh;       /* make section taller than viewport */
+}
+.servicesSection {
+  position: relative;
+  width: 100%;
+  padding: 80px 6vw;
+  box-sizing: border-box;
+  background: #0b0b0b;
+  color: #fff;
+  /* ensure section is taller than viewport (helps layout & scroll feel) */
+  min-height: var(--services-min-height);
+}
+
+/* keep inner content above canvas */
+.inner {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* kicker / headline kept as you had */
+.kicker {
+  margin-bottom: 28px;
+  color: rgba(255, 255, 255, 0.9);
+}
+.dot {
+  background: #ff4b2b;
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.headline {
+  font-size: clamp(28px, 5vw, 64px);
+  line-height: 1.02;
+  margin-bottom: 48px;
+  color: #fff;
+}
+.accent {
+  color: #ff4b2b;
+}
+
+/* layout columns */
+.columns {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+.column {
+  flex: 1 1 0;
+}
+.columnTitle {
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #fff;
+}
+
+/* list */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+.list li {
+  margin: 12px 0;
+}
+
+/* clickable link - shrinkwrap to content */
+.link {
+  display: inline-block;
+  padding: 6px 8px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  text-align: left;
+  cursor: pointer;
+  transition: color 220ms ease, opacity 220ms ease;
+  pointer-events: auto;
+}
+
+/* exported hovered class (use styles.hovered) - flips the text color for readability */
+.hovered {
+  color: #0a0a0a !important;
+  text-shadow: none !important;
+}
+
+/* Canvas overlay:
+   make it fixed to viewport so the preview plane follows client coords reliably
+   and doesn't jump when the section scrolls. We still only render preview when section is visible.
+*/
+.canvasOverlay {
+  position: absolute;  /* <-- changed to absolute from fixed */
+  inset: 0;            /* fill the section area */
+  pointer-events: none;
+  z-index: 5;          /* below .inner (10) so text is still on top */
+  overflow: visible;
+}
+
+/* ensure canvas won't catch pointer events */
+.canvasOverlay canvas {
+  pointer-events: none !important;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* responsiveness */
+@media (max-width: 900px) {
+  .columns {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .headline {
+    font-size: clamp(22px, 6.5vw, 40px);
+  }
+}
