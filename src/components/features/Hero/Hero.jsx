@@ -6,7 +6,7 @@ import Fox from "./Fox";
 import Lights from "./Lights";
 import Effects from "./Effects";
 import SceneBackground from "./SceneBackground";
-import styles from "./styles/Hero.module.css";
+import styles from "./styles/hero.module.css";
 
 export default function Hero() {
   const [hover, setHover] = useState(false);
