@@ -54,7 +54,7 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/globals.css";
-import Layout from "./layouts/Layout";
+import Layout from "./Layouts/Layout";
 import Loader from "./components/Preloader/Loader";
 
 // Lazy-load the Home page. Suspense will wait for this code to be ready.
