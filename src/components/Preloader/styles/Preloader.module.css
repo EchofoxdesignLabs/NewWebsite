@@ -1,0 +1,51 @@
+/* Preloader.module.css */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #fff; /* or match hero background */
+  z-index: 99999;
+  transition: opacity .36s ease, visibility .36s;
+  will-change: opacity;
+}
+
+.center {
+  max-width: 420px;
+  text-align: center;
+  padding: 20px;
+}
+
+.logo {
+  margin-bottom: 18px;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.08));
+}
+
+.title {
+  font-weight: 700;
+  margin-bottom: 18px;
+  font-size: 20px;
+  color: #111;
+}
+
+.barWrap {
+  height: 8px;
+  background: rgba(0,0,0,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 0 28px;
+}
+
+.bar {
+  height: 100%;
+  background: linear-gradient(90deg,#ff4b2b,#ff7a5b);
+  width: 0%;
+  border-radius: 999px;
+  transition: width 240ms cubic-bezier(.2,.9,.25,1);
+}
+
+.progressText {
+  margin-top: 8px;
+  color: #777;
+  font-size: 13px;
+}

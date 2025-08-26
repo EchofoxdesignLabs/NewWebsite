@@ -13,4 +13,6 @@ body {
 #root {
   width: 100vw;
   height: 100vh;
+   /* This sets the background for the entire app container, matching your Hero section */
+  background-color: #fafafa;
 }
