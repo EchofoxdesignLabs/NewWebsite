@@ -21,7 +21,7 @@ export default function WorkSection() {
         {/* 3D Canvas fills the sticky viewport */}
         <div className={styles.workCanvasLayer} aria-hidden="true">
           <Canvas
-            gl={{ antialias: false,        // rely on SMAA, saves memory
+            gl={{ antialias: true,        // rely on SMAA, saves memory
                 alpha: false,
                 powerPreference: "high-performance", }}
             dpr={[1, 1.5]}

@@ -54,25 +54,36 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/globals.css";
-import Layout from "./Layouts/Layout";
+import Layout from "./layouts/Layout";
+import Loader from "./components/Preloader/Loader";
 
-// lazy pages
+// Lazy-load the Home page. Suspense will wait for this code to be ready.
 const Home = lazy(() => import("./pages/Home"));
-// const About = lazy(() => import("./pages/About"));
-// const Contact = lazy(() => import("./pages/Contact"));
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<div style={{ height: 400 }}>Loading…</div>}>
-        <Routes>
-          {/* Layout route wraps all child routes with Header + Footer */}
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-            {/* Add other routes here (work, blog etc.) */}
-          </Route>
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        {/*
+          This single Suspense boundary is the key.
+          It will wait for the lazy-loaded <Home> code to download AND
+          for all the useGLTF/useTexture calls inside <Home> to finish.
+          The fallback={null} prevents any content from showing until it's all ready.
+        */}
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+
+      {/* The Loader sits on top and automatically tracks all loading activity caught by Suspense */}
+      <Loader />
+    </>
   );
 }
+// src/App.jsx
+
+
