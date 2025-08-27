@@ -1,28 +1,4 @@
 // // src/features/showreel/Showreel.jsx
-
-// import React from 'react';
-// // Import the CSS module. Vite handles the rest!
-// import styles from './styles/Showreel.module.css';
-
-// export default function Showreel() {
-//   return (
-//     // Use the class name from our CSS module
-//     <section className={styles.showreelContainer}>
-//       <video
-//         className={styles.video}
-//         src="/videos/showreel.mp4" // Path to your video in the /public folder
-//         autoPlay
-//         loop
-//         muted
-//         playsInline // Important for playback on mobile devices
-//       />
-//       {/* You can add text or other overlay elements here if needed */}
-//       <div className={styles.overlay}>
-//         {/* <h2 className={styles.title}>Arsfutura</h2> */}
-//       </div>
-//     </section>
-//   );
-// }
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles/Showreel.module.css";
 
@@ -36,7 +12,7 @@ import styles from "./styles/Showreel.module.css";
  * - Preload metadata only; set a poster for faster LCP.
  * - Optional remember last mute state (localStorage).
  */
-export default function Showreel() {
+export default function Showreel({onReady}) {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
   const [isMuted, setIsMuted] = useState(() => {
@@ -76,6 +52,25 @@ export default function Showreel() {
       localStorage.setItem("showreel_muted", String(isMuted));
     } catch {}
   }, [isMuted]);
+  //Check if the video is ready
+  useEffect(() => {
+    const v = videoRef.current; if (!v) return;
+    let done = false;
+    const finish = () => { if (!done) { done = true; onReady?.(); } };
+    const onData = () => finish();
+    const onCanPlay = () => finish();
+    const onError = () => finish();
+    const fallback = setTimeout(finish, 15000);
+    v.addEventListener("loadeddata", onData);
+    v.addEventListener("canplaythrough", onCanPlay);
+    v.addEventListener("error", onError);
+    return () => {
+      clearTimeout(fallback);
+      v.removeEventListener("loadeddata", onData);
+      v.removeEventListener("canplaythrough", onCanPlay);
+      v.removeEventListener("error", onError);
+    };
+  }, [onReady]);
 
   // IntersectionObserver: pause when offscreen, play when visible (if allowed)
   useEffect(() => {

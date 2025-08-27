@@ -18,7 +18,8 @@ export default function Fox({ onHoverChange, ...restProps }) {
   const { actions, mixer } = useAnimations(animations, group);
 
   const { camera, scene } = useThree();
-
+  // ensure we only call done once
+  const doneRef = useRef(false);
   // interaction helpers
   const raycaster = useRef(new THREE.Raycaster());
   const mouse = useRef(new THREE.Vector2());
@@ -51,6 +52,7 @@ export default function Fox({ onHoverChange, ...restProps }) {
   // Setup GLTF scene, material, animations, pointer handlers
   useEffect(() => {
     if (!gltfScene) return;
+    
 
     // SINGLE white material reused across meshes to reduce allocations
     const whiteMaterial = new THREE.MeshStandardMaterial({

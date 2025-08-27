@@ -1,5 +1,5 @@
 // src/components/Hero.jsx
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState,useMemo,useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Fox from "./Fox";
@@ -7,6 +7,7 @@ import Lights from "./Lights";
 import Effects from "./Effects";
 import SceneBackground from "./SceneBackground";
 import styles from "./styles/hero.module.css";
+
 
 export default function Hero() {
   const [hover, setHover] = useState(false);
@@ -28,9 +29,11 @@ export default function Hero() {
         }}
         className={styles.canvasFull}
       >
+        
+        <SceneBackground color="#fafafa" />
         <Suspense fallback={null}>
           {/* Set the scene background color exactly like your original */}
-          <SceneBackground color="#fafafa" />
+          
 
           <Lights />
           <Fox onHoverChange={(v) => setHover(v)} />

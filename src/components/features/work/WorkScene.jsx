@@ -111,7 +111,7 @@ export default function WorkScene({ sectionEl }) {
                         mat.map.needsUpdate = true;
                       }
                       // If you have emissiveMap / aoMap / etc handle similarly
-                      if (mat.emissiveMap) { mat.emissiveMap.encoding = THREE.sRGBEncoding; mat.emissiveMap.anisotropy = renderer.capabilities.getMaxAnisotropy(); mat.emissiveMap.needsUpdate = true; }
+                      if (mat.emissiveMap) { mat.emissiveMap.encoding = THREE.sRGBEncoding; mat.emissiveMap.anisotropy = gl.capabilities.getMaxAnisotropy(); mat.emissiveMap.needsUpdate = true; }
                       mat.needsUpdate = true;
                   });
               }
