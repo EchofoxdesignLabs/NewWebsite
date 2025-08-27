@@ -5,6 +5,7 @@ import Overlay from "./Overlay";
 import { productsWithData } from "./productsData";
 import styles from "./styles/Work.module.css";
 
+
 export default function WorkSection() {
   const pages = productsWithData.length;
   const sectionRef = useRef(null); // <-- pass section DOM to WorkScene

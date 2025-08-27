@@ -51,36 +51,36 @@
 //   );
 // }
 // src/App.jsx
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/globals.css";
 import Layout from "./Layouts/Layout";
-import Loader from "./components/Preloader/Loader";
-
-// Lazy-load the Home page. Suspense will wait for this code to be ready.
-const Home = lazy(() => import("./pages/Home"));
+import BootLoader from "./components/Preloader/BootLoader";
+import Home from "./pages/Home"; // EAGER import so canvases mount immediately
 
 export default function App() {
+  const [showreelReady, setShowreelReady] = useState(false);
+
   return (
     <>
       <BrowserRouter>
-        {/*
-          This single Suspense boundary is the key.
-          It will wait for the lazy-loaded <Home> code to download AND
-          for all the useGLTF/useTexture calls inside <Home> to finish.
-          The fallback={null} prevents any content from showing until it's all ready.
-        */}
+        {/* It's okay to keep a Suspense here for the non-critical lazy sections inside Home */}
         <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Home />} />
+              {/* Pass the onShowreelReady callback down */}
+              <Route index element={<Home onShowreelReady={() => setShowreelReady(true)} />} />
             </Route>
           </Routes>
         </Suspense>
       </BrowserRouter>
 
-      {/* The Loader sits on top and automatically tracks all loading activity caught by Suspense */}
-      <Loader />
+      {/* Full-screen loader with its own video + progress bar */}
+      <BootLoader
+        showreelReady={showreelReady}
+        videoSrc="/videos/loader.mp4"          // <-- replace with your loader video
+        videoPoster="/videos/portal-empty.gif"
+      />
     </>
   );
 }

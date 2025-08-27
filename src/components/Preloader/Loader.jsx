@@ -3,10 +3,12 @@ import { useProgress } from '@react-three/drei';
 import styles from './styles/Loader.module.css';
 
 export default function Loader() {
+  // This hook from Drei automatically tracks all loading assets
   const { active, progress } = useProgress();
 
   return (
-    // The overlay fades out when loading is complete (when 'active' becomes false)
+    // The overlay has a fade-out animation that is triggered
+    // by the 'loaded' class when loading is no longer active.
     <div className={`${styles.overlay} ${!active ? styles.loaded : ''}`}>
       <div className={styles.center}>
         <div className={styles.barWrap}>

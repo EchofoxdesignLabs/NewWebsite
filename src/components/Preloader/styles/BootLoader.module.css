@@ -1,0 +1,73 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000; /* fallback behind video */
+  overflow: hidden;
+}
+
+.videoBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* fill screen, preserve aspect */
+  object-position: center;
+  display: block;
+}
+
+/* subtle darkener for readability (optional) */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.35) 0%,
+    rgba(0,0,0,0.45) 60%,
+    rgba(0,0,0,0.55) 100%
+  );
+  pointer-events: none;
+}
+
+/* HUD sits above the scrim; bottom-centered with safe-area padding */
+.hud {
+  position: absolute;
+  left: 50%;
+  bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  width: min(720px, 90vw);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding: 0 12px;
+}
+
+/* progress bar */
+.barWrap {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.28);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
+}
+
+.bar {
+  height: 100%;
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform .2s ease;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.6),
+    rgba(255,255,255,0.9)
+  );
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+}
+
+.progressText {
+  font: 600 14px/1.2 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
