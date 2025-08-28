@@ -1,0 +1,74 @@
+:root {
+  --ctaH: 56px;
+  --ctaPadX: 32px;
+  --ctaFontSize: 18px;
+  --ctaStroke: 4px;
+  --ctaAccent: #ff4b2b;
+}
+
+/* wrapper */
+.cta {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  height: var(--ctaH);
+  padding: 0 var(--ctaPadX);
+  border-radius: 9999px;
+  text-decoration: none;
+  color: var(--text-color, #0a0a0a);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  isolation: isolate;
+
+  /* reset native button/anchor chrome to remove black border */
+  background: transparent;
+  border: none;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* sizes */
+.sm { --ctaH: 46px; --ctaPadX: 22px; --ctaFontSize: 16px; }
+.md { /* defaults */ }
+.lg { --ctaH: 66px; --ctaPadX: 40px; --ctaFontSize: 24px; }
+
+/* center label */
+.label {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  line-height: 1;
+  font-family: var(--font-heading, inherit);
+  font-weight: 700;
+  font-size: var(--ctaFontSize);
+  letter-spacing: 0.02em;
+  transform: translateZ(0);
+  /* keep this zero so you don't see a second underline */
+  padding-bottom: 0;
+}
+
+/* SVG outline */
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.path {
+  fill: none;
+  stroke: var(--ctaAccent);
+  stroke-width: var(--ctaStroke);
+  vector-effect: non-scaling-stroke;
+  stroke-linecap: round;   /* nicer seam at center */
+  stroke-linejoin: round;
+}
+
+/* optional keyboard ring */
+.cta:focus-visible {
+  outline: 4px solid rgba(255, 75, 43, 0.45);
+  outline-offset: 3px;
+}

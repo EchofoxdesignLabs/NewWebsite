@@ -3,7 +3,8 @@ import { Canvas } from "@react-three/fiber";
 import WorkScene from "./WorkScene";
 import Overlay from "./Overlay";
 import { productsWithData } from "./productsData";
-import styles from "./styles/Work.module.css";
+import styles from "./styles/WorkSection.module.css";
+import Parallax from "../../../scroll/Parallax";
 
 
 export default function WorkSection() {
@@ -39,7 +40,7 @@ export default function WorkSection() {
           <Overlay />
         </div>
       </div>
-
+      
       {/* Anchors to provide N viewports of scroll within this section */}
       <div className={styles.workAnchors}>
         {productsWithData.map((p) => (

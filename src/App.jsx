@@ -57,12 +57,15 @@ import "./styles/globals.css";
 import Layout from "./Layouts/Layout";
 import BootLoader from "./components/Preloader/BootLoader";
 import Home from "./pages/Home"; // EAGER import so canvases mount immediately
+import Work from "./pages/Work";
+import { ScrollProvider } from "./scroll/ScrollProvider";
 
 export default function App() {
   const [showreelReady, setShowreelReady] = useState(false);
 
   return (
     <>
+    <ScrollProvider>
       <BrowserRouter>
         {/* It's okay to keep a Suspense here for the non-critical lazy sections inside Home */}
         <Suspense fallback={null}>
@@ -70,6 +73,7 @@ export default function App() {
             <Route path="/" element={<Layout />}>
               {/* Pass the onShowreelReady callback down */}
               <Route index element={<Home onShowreelReady={() => setShowreelReady(true)} />} />
+              <Route path="/work" element={<Work onShowreelReady={() => setShowreelReady(true)} />} />
             </Route>
           </Routes>
         </Suspense>
@@ -81,6 +85,7 @@ export default function App() {
         videoSrc="/videos/loader.mp4"          // <-- replace with your loader video
         videoPoster="/videos/portal-empty.gif"
       />
+      </ScrollProvider>
     </>
   );
 }

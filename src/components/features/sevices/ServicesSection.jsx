@@ -12,6 +12,7 @@ import * as THREE from "three";
 import gsap from "gsap";
 import styles from "./styles/Services.module.css";
 import { SERVICES_COLUMNS } from "./ServiceColumns";
+import Parallax from "../../../scroll/Parallax";
 
 /* ---------- Shaders ---------- */
 const vertex = `
@@ -183,6 +184,7 @@ export default function ServicesSection() {
       onMouseMove={onMouseMove}
       onMouseLeave={handleLeave}
     >
+      <Parallax speed={-0.2}>
       <div className={styles.inner}>
         <p className={styles.kicker}><span className={styles.dot} /> our services</p>
         <h2 className={styles.headline}>
@@ -212,6 +214,7 @@ export default function ServicesSection() {
           ))}
         </div>
       </div>
+      </Parallax>
 
       <div ref={overlayRef} className={styles.canvasOverlay} aria-hidden="true">
         {isSectionVisible && overlayRect && (

@@ -20,6 +20,7 @@
   --font-heading: 'Redcollar', sans-serif; /* Use Redcollar for main headings */
   --font-body: 'Otterco', sans-serif; /* Use Otterco for body/nav text */
 }
+.parallax-willchange { will-change: transform; }
 
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; margin: 0; font-family: var(--font-body); /* Apply the new body font */ }

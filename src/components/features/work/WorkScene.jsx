@@ -380,7 +380,6 @@ export default function WorkScene({ sectionEl }) {
         arrivedAtRef.current = performance.now(); // <-- mark arrival time for dwell
       },
     });
-
     tl.to(
       camera.position,
       { x: camPos.x, y: camPos.y, z: camPos.z, duration, ease: "power2.out" },
@@ -405,6 +404,18 @@ export default function WorkScene({ sectionEl }) {
         { value: focusDist, duration, ease: "power2.out" },
         0
       );
+    }
+    // NEW: Your suggested "arrival animation" to showcase the parallax
+    // This runs after the main camera movement is complete.
+    if (duration > 0) {
+      tl.to(camera.position, {
+        x: `+=${2.0}`, // Move slightly right...
+        y: `+=${2.0}`, // and slightly up...
+        duration: 0.7,
+        ease: "sine.inOut",
+        yoyo: true,      // ...then automatically move back to center
+        repeat: 1,       // yoyo makes it play forward and backward once
+      });
     }
   }
 

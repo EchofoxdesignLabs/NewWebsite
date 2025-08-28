@@ -1,33 +1,29 @@
-/* src/components/ui/Header/Header.module.css */
+/* src/components/ui/Header/styles/Header.module.css */
+
 .header {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 40;
-  pointer-events: none; /* allow only interactive children to receive pointer events */
+  pointer-events: none;
 }
-.inner {
-  display:flex;
-  align-items:center;
-  gap:28px;
-  padding: 36px 6vw;
-  box-sizing:border-box;
-}
+.inner { display:flex; align-items:center; gap:28px; padding:36px 6vw; box-sizing:border-box; }
 .brand img { height:24px; pointer-events:auto; display:block; }
 .line { flex:1; height:1px; background:#272727; margin:0 18px; pointer-events:none; }
-.nav {
-  display:flex;
-  gap:32px;
-  pointer-events:auto;
-}
-.nav a {
-  color:var(--text-color);
-  text-decoration:none;
-  font-weight:600;
-  font-size:18px;
-  letter-spacing:2px;
+
+.nav { display:flex; gap:32px; pointer-events:auto; }
+
+/* ✅ target our class, not the tag */
+.link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 2px;
   transition: transform .18s;
-  display:inline-block;
+  display: inline-block;
 }
-.nav a:hover { transform:scale(1.08); }
+
+.link:hover { transform: scale(1.08); }
+
+/* ✅ make the active style win */
+.link.active { color: var(--accent, #ff4b2b); }

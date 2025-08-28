@@ -26,6 +26,8 @@ const sectionRef = useRef(null);
   const accRef = useRef(0);
   const cooldownRef = useRef(false);
   const textActiveRef = useRef(true); // controls whether the heading effect runs
+  // FIXED: Simplified the refs for the new animation logic
+  const wheelDeltaRef = useRef(0);
 
   // tuning
   const THRESH = 80;
@@ -55,41 +57,41 @@ const sectionRef = useRef(null);
 
     let raf;
     const relax = () => {
-      // if text effect disabled, keep bytes neutral
-      if (!letterRefs.current.length) return;
-      letterRefs.current.forEach((span) => {
-        const t = parseFloat(span.dataset.ty || "0") * 0.9;
-        const r = parseFloat(span.dataset.rz || "0") * 0.9;
-        const sc = parseFloat(span.dataset.sc || "1");
-        span.dataset.ty = t;
-        span.dataset.rz = r;
-        gsap.set(span, { y: t, rotateZ: r, scale: 0.9 * (sc - 1) + 1 });
-      });
+      // On each frame, apply a little of the scroll "force" to the letters
+      nudgeHeading(wheelDeltaRef.current);
+      // Then, apply "friction" to the force so it diminishes over time
+      wheelDeltaRef.current *= 0.92;
+
       raf = requestAnimationFrame(relax);
     };
     raf = requestAnimationFrame(relax);
     return () => cancelAnimationFrame(raf);
-  }, []);
+  }, []); // Empty dependency array is correct here
 
-  // map wheel delta -> per-letter transforms (smooth gsap set)
+   // FIXED: This function no longer creates tweens. It just calculates the target positions.
   const nudgeHeading = (delta) => {
-    if (!textActiveRef.current) return; // stop effect when disabled
     const letters = letterRefs.current;
     if (!letters?.length) return;
-    const dist = Math.max(-150, Math.min(150, delta));
-    const translateBase = gsap.utils.mapRange(150, -150, -90, 90, dist);
-    const rotateBase = gsap.utils.mapRange(150, -150, -15, 15, dist);
-    const scaleBase = gsap.utils.mapRange(0, 50, 1, 0.96, Math.abs(dist));
+
+    // A much smaller multiplier for a more subtle effect
+    const dist = Math.max(-40, Math.min(40, delta * 0.5));
+    const translateBase = gsap.utils.mapRange(40, -40, -50, 50, dist);
+    const rotateBase = gsap.utils.mapRange(40, -40, -5, 5, dist);
     const mid = Math.ceil(letters.length / 2);
 
     letters.forEach((span, j) => {
-      const factor = j < mid ? j : mid - Math.abs(Math.floor(letters.length / 2) - j) - 1;
+      const factor = j < mid ? j / mid : (letters.length - 1 - j) / mid;
       const localTy = factor * translateBase;
-      const localRz = j < mid ? Math.abs(factor - mid) * rotateBase : -Math.abs(factor - mid) * rotateBase;
-      span.dataset.ty = localTy;
-      span.dataset.rz = localRz;
-      span.dataset.sc = scaleBase;
-      gsap.to(span, { y: localTy, rotateZ: localRz, scale: scaleBase, duration: 0.55, ease: "power3.out", overwrite: true });
+      const localRz = (j - mid) * rotateBase * factor * 0.2;
+      
+      // Smoothly interpolate the current position towards the target
+      const currentY = parseFloat(gsap.getProperty(span, "y")) || 0;
+      const currentR = parseFloat(gsap.getProperty(span, "rotation")) || 0;
+      
+      gsap.set(span, {
+        y: currentY + (localTy - currentY) * 0.8,
+        rotation: currentR + (localRz - currentR) * 0.1,
+      });
     });
   };
 
@@ -157,8 +159,8 @@ const sectionRef = useRef(null);
     const onWheel = (e) => {
       // if section isn't pinned we let page scroll normally
       if (!pinnedRef.current) return;
-      // visual nudge for the heading (if active)
-      nudgeHeading(e.deltaY);
+      // FIXED: Instead of calling an animation, we just add to the "force"
+      wheelDeltaRef.current += e.deltaY;
 
       const dir = e.deltaY > 0 ? 1 : -1;
       const atLast = currentRef.current >= CARDS.length;

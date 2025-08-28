@@ -45,6 +45,7 @@
   position: relative;
   background-color: #000;
   overflow: hidden;
+  contain: layout paint; 
 }
 
 .videoWrap {
@@ -55,6 +56,7 @@
   max-height: 100vh;     /* prevent over-tall on ultra-wide */
   margin: 0 auto;
   background: #000;
+  transform: translateZ(0); will-change: transform;
 }
 
 .video {
