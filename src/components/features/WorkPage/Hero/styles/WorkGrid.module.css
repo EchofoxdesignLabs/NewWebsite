@@ -1,0 +1,54 @@
+/* src/components/features/workPage/styles/WorkGrid.module.css */
+
+/* Bar that holds the tabs */
+.tabBar {
+  position: relative;
+  display: flex;
+  gap: clamp(28px, 4.2vw, 64px);
+  align-items: flex-end;
+  margin: 24px 0 22px;
+  padding-bottom: 10px; /* space for underline */
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Each tab */
+.tab {
+  position: relative;
+  appearance: none;
+  background: transparent;
+  border: none;
+  padding: 0 0 8px;
+  margin: 0;
+  cursor: pointer;
+
+  font-family: var(--font-heading, "Redcollar"), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-weight: 800;
+  font-size: clamp(18px, 2.1vw, 24px);
+  color: #7a7a7a;
+  letter-spacing: 0.02em;
+  transition: color .25s ease, transform .25s ease;
+}
+
+.tab:hover { color: #111; transform: translateY(-1px); }
+.active     { color: #111; }
+
+/* The red underline that slides */
+.underline {
+  position: absolute;
+  left: 0;
+  bottom: -2px;        /* sits on top of the border-bottom nicely */
+  height: 3px;
+  width: 0px;
+  background: var(--accent, #ff4b2b);
+  border-radius: 999px;
+  transform: translateX(0); /* animated via GSAP */
+  pointer-events: none;
+}
+
+/* Extra text under the card title */
+.desc {
+  margin: 8px 0 14px 0;
+  color: rgba(0,0,0,0.62);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}

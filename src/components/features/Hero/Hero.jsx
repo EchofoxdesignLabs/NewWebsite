@@ -7,6 +7,7 @@ import Lights from "./Lights";
 import Effects from "./Effects";
 import SceneBackground from "./SceneBackground";
 import styles from "./styles/hero.module.css";
+import Parallax from "../../../scroll/Parallax";
 
 
 export default function Hero() {
@@ -48,6 +49,7 @@ export default function Hero() {
       </Canvas>
 
       {/* Page DOM content (sits above the canvas) */}
+      <Parallax speed={-0.5}>
       <div className={styles.heroContent}>
         <div className={styles.heroLeft}>
           <h1 className={styles.heroTitle}>
@@ -61,6 +63,7 @@ export default function Hero() {
         </div>
         {/* (Optional: add DOM elements for right side overlay if necessary) */}
       </div>
+      </Parallax>
     </section>
   );
 }

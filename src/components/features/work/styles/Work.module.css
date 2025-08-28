@@ -1,81 +1,107 @@
-/* src/components/features/work/styles/Work.module.css
-   Sticky viewport approach (no global canvas rules, no fixed canvas).
-*/
+/* src/pages/styles/Work.module.css */
 
-/* -------- Section wrapper (outer <section>) -------- */
-.workSectionWrapper {
-  position: relative;
+/* page wrapper */
+.page {
   width: 100%;
-  /* Height is set inline from React: height = pages * 100vh */
-  overflow: visible;
+  min-height: 100vh;
+  background: var(--page-bg, #ffffff);
+  color: var(--text-color, #0a0a0a);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* -------- Sticky viewport (the pin) -------- */
-/* This element stays pinned for the duration of the section */
-.workStickyViewport {
-  position: sticky;
-  top: 0;               /* adjust if you have a fixed header (e.g., top: 80px) */
-  height: 100vh;        /* viewport-sized area */
-  z-index: 5;           /* below site header (keep header > 5) */
-  pointer-events: none; /* let inner layers decide */
-  isolation: isolate;   /* create a stacking context (safer layering) */
+/* top hero spacing above the grid */
+.heroSpacing {
+  /* push the hero away from the header; tweak to taste */
+  padding: 120px 6vw 56px;
+  box-sizing: border-box;
 }
 
-/* Canvas layer fills the sticky viewport */
-.workCanvasLayer {
-  position: absolute;
-  inset: 0;
-  pointer-events: auto; /* allow 3D interactions */
+/* inner container to constrain width like other sections */
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Ensure canvas fills */
-.workCanvasLayer canvas {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-  object-fit: cover;
-}
-
-/* -------- Overlay inside the sticky viewport -------- */
-.workOverlaySticky {
-  position: relative;   /* relative to sticky viewport */
-  height: 100%;
-  display: flex;
+/* small kicker label above the title */
+.kicker {
+  display: inline-flex;
   align-items: center;
-  box-sizing: border-box;
-  padding-left: 6vw;
-  padding-right: 6vw;
-  pointer-events: none; /* default: non-interactive (links below opt-in) */
-  z-index: 10;          /* above canvas inside the sticky viewport */
+  gap: 12px;
+  margin: 0 0 18px 0;
+  color: var(--muted, #666);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-weight: 600;
 }
-.workOverlaySticky * { pointer-events: auto; }
 
-/* -------- Anchors in normal flow (make the section tall) -------- */
-.workAnchors { display: block; }
-.workAnchor {
-  height: 100vh;
+/* small red dot used in the kicker */
+.dotSmall {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent, #ff4b2b);
+  display: inline-block;
+}
+
+/* hero / page title */
+.title {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-heading, "Redcollar"), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--heading-color, #0a0a0a);
+  /* responsive clamp to match the large typographic treatment */
+  font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+  max-width: 1100px;
+}
+
+/* optional small description under title (if you add one later) */
+.lead {
+  margin-top: 18px;
+  color: var(--muted, #717171);
+  max-width: 64ch;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* CTA wrapper (keeps the CTA aligned under the content) */
+.ctaRow {
+  margin-top: 36px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* separator line to visually separate hero from grid (optional) */
+.separator {
+  margin: 48px auto 0;
+  height: 1px;
   width: 100%;
-  box-sizing: border-box;
+  max-width: 1200px;
+  background: rgba(0,0,0,0.04);
 }
 
-/* -------- Text styles (your original overlay styles) -------- */
-.textOverlay { position: relative; width: 100%; max-width: 620px; color: white; pointer-events: none; }
-.textContent { opacity: 0; transform: translateY(20px); transition: opacity .45s cubic-bezier(.2,.9,.2,1), transform .45s cubic-bezier(.2,.9,.2,1); }
-.textContent.visible { opacity: 1; transform: translateY(0); }
+/* Basic responsive tweaks */
+@media (max-width: 1000px) {
+  .heroSpacing {
+    padding: 88px 5vw 48px;
+  }
+  .title {
+    font-size: clamp(2rem, 8vw, 3.4rem);
+    max-width: 90%;
+  }
+  .inner { padding: 0 2vw; }
+}
 
-.productCategory { display:inline-flex; align-items:center; font-family:'OttercoDisplay-Regular',sans-serif; font-size:.9rem; text-transform:lowercase; letter-spacing:1px; margin-bottom:1.2rem; color:rgba(255,255,255,.9); }
-.productCategory::before { content:''; display:inline-block; width:8px; height:8px; background:#ff4b2b; border-radius:50%; margin-right:10px; }
-
-.productTitle { font-family:'Redcollar',sans-serif; font-size:clamp(2.8rem,6vw,4.2rem); margin:0 0 .6rem 0; font-weight:700; line-height:.95; color:#fff; white-space:nowrap; }
-.productDescription { font-family:'OttercoDisplay-Regular',sans-serif; font-size:1rem; line-height:1.6; margin:0 0 2.2rem 0; max-width:38rem; color:rgba(255,255,255,.9); }
-
-.exploreLink { display:inline-block; position:relative; font-family:'Redcollar',sans-serif; font-size:1.05rem; color:#fff; text-decoration:none; padding-bottom:6px; border-bottom:2px solid #ff4b2b; pointer-events:auto; transition:border-bottom-color .35s; }
-.exploreLink::after { content:attr(data-text); position:absolute; inset:0; color:#ff4b2b; clip-path:polygon(0 100%,100% 100%,100% 100%,0 100%); transition:clip-path .35s cubic-bezier(.2,.9,.2,1); }
-.exploreLink:hover { border-bottom-color:transparent; }
-.exploreLink:hover::after { clip-path:polygon(0 0,100% 0,100% 100%,0 100%); }
-
-@media (max-width:900px) {
-  .workOverlaySticky { padding-left: 4vw; padding-right: 4vw; }
-  .productTitle { font-size: clamp(2rem,8vw,3rem); white-space: normal; }
-  .productDescription { max-width: 100%; }
+@media (max-width: 600px) {
+  .heroSpacing {
+    padding: 64px 4vw 36px;
+  }
+  .kicker { font-size: 0.9rem; }
+  .title { font-size: clamp(1.6rem, 11vw, 2.4rem); line-height: 1.05; }
+  .lead { font-size: 1rem; }
 }

@@ -1,0 +1,42 @@
+/* src/components/features/workPage/styles/WorkHero.module.css */
+.heroSpacing {
+  padding: 120px 6vw 40px;
+  box-sizing: border-box;
+  background: var(--page-bg, #fff);
+}
+.inner { max-width: 1200px; margin: 0 auto; }
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px 0;
+  color: var(--muted, #666);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+.dotSmall { width:8px; height:8px; border-radius:50%; background: var(--accent, #ff4b2b); display:inline-block; }
+
+.title {
+  margin: 0;
+  font-family: var(--font-heading, "Redcollar"), system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -0.02em;
+  color: var(--heading-color, #0a0a0a);
+  font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+}
+
+.separator {
+  margin: 48px auto 0;
+  height: 1px;
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(0,0,0,.05);
+}
+
+@media (max-width: 900px){
+  .heroSpacing{ padding: 88px 5vw 28px; }
+  .title{ font-size: clamp(2rem, 8vw, 3.3rem); }
+}

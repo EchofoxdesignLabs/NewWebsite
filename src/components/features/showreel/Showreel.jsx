@@ -1,6 +1,7 @@
 // // src/features/showreel/Showreel.jsx
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./styles/Showreel.module.css";
+import Parallax from "../../../scroll/Parallax";
 
 /**
  * Showreel best‑practices:
@@ -15,6 +16,8 @@ import styles from "./styles/Showreel.module.css";
 export default function Showreel({onReady}) {
   const videoRef = useRef(null);
   const sectionRef = useRef(null);
+  // 200vh = pinned for one viewport of scrolling. Tweak to taste.
+  const sectionHeight = "200vh";
   const [isMuted, setIsMuted] = useState(() => {
     // Persist mute preference across visits (optional)
     try {
@@ -118,6 +121,7 @@ export default function Showreel({onReady}) {
 
   return (
     <section ref={sectionRef} className={styles.showreelContainer}>
+      <Parallax speed={0.01} anchorRef={sectionRef} lerp={0.12}>
       <div className={styles.videoWrap}>
         <video
           ref={videoRef}
@@ -163,6 +167,7 @@ export default function Showreel({onReady}) {
           )}
         </button>
       </div>
+      </Parallax>
 
       {/* Optional overlay slot */}
       <div className={styles.overlay}>{/* put headings/badges here if needed */}</div>
