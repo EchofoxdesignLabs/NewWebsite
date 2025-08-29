@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useProjectStore } from './useProjectStore';
-import styles from './styles/Work.module.css';
+import styles from './styles/WorkSection.module.css';
 
 export default function Overlay() {
   const projects = useProjectStore((s) => s.projects);
