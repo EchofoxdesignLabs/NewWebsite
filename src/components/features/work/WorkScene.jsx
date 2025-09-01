@@ -14,7 +14,7 @@ import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import gsap from "gsap";
 import { productsWithData } from "./productsData";
 import { useProjectStore } from "./useProjectStore";
-import { REVISION } from "three"
+import { REVISION } from "three";
 
 /**
  * Props:
