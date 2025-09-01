@@ -60,6 +60,7 @@ import Home from "./pages/Home"; // EAGER import so canvases mount immediately
 import Work from "./pages/Work";
 import { ScrollProvider } from "./scroll/ScrollProvider";
 import VideoPreloader from "./components/Preloader/VideoPreloader";
+const Airfrens_CaseStudy = React.lazy(() => import("./pages/case_studies/Airfrens"));
 
 export default function App() {
   const [showreelReady, setShowreelReady] = useState(false);
@@ -75,6 +76,7 @@ export default function App() {
               {/* Pass the onShowreelReady callback down */}
               <Route index element={<Home />} />
               <Route path="/work" element={<Work />} />
+              <Route path='/work/airfrens' element ={<Airfrens_CaseStudy />} />
             </Route>
           </Routes>
         </Suspense>

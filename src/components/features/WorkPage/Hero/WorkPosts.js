@@ -9,6 +9,7 @@ export const WORKS = [
       "Built for the top performing DJs, Promoters, Venues, Festivals and Artists.",
     img: "/images/blogs/img1.jpg",
     href: "#",
+    caseStudy: "/work/kydlabs/case-study"
   },
   {
     id: "airfrens",
@@ -18,6 +19,7 @@ export const WORKS = [
       "A social web3 dating app reimagining discovery and connection from scratch.",
     img: "/images/blogs/img1.jpg",
     href: "#",
+    caseStudy: "/work/airfrens"
   },
   {
     id: "stevie",

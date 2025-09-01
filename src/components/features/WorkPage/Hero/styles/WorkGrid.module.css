@@ -1,5 +1,10 @@
 /* src/components/features/workPage/styles/WorkGrid.module.css */
+:root{
+  
+  --underline-h: 4px;
+  --image-height: 340px; /* change this to reduce image size */
 
+}
 /* Bar that holds the tabs */
 .tabBar {
   position: relative;
@@ -45,7 +50,118 @@
   pointer-events: none;
 }
 
-/* Extra text under the card title */
+/* wrapper for each card so we can trigger hover states */
+.workCard {
+  position: relative;
+  /* ensure overflow hidden so image zoom doesn't leak */
+  overflow: visible;
+}
+
+/* image wrapper - keep position relative for overlay placement */
+.imageWrap {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 4px; /* inherits same rounding as blog card */
+}
+
+/* image style extension */
+.image {
+  transition: transform 0.6s cubic-bezier(.2,.8,.2,1), filter 0.35s ease;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* zoom when card (title or image) is hovered */
+.workCard:hover .image,
+.imageWrap:hover .image {
+  transform: scale(1.04);
+}
+
+/* TITLE underline: we add our own pseudo underline so we can trigger it from card hover */
+/* Note: we attach this class next to the existing grid.titleLink so we don't break the original styles */
+.titleLink {
+  color: #111;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px; /* room for underline */
+  outline: none;
+}
+
+/* underline pseudo-element */
+.titleLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 100%;                        /* span full text width */
+  background: var(--accent, #ff4b2b);
+  border-radius: 2px;
+  transform: scaleX(0);               /* hidden by scaling */
+  transform-origin: center;           /* animate from center — change to left if you prefer */
+  transition: transform 0.28s cubic-bezier(.2,.8,.2,1), opacity .2s;
+  opacity: 0.95;
+  will-change: transform;
+}
+
+/* on title hover -> expand */
+.titleLink:hover::after,
+.titleLink:focus::after {
+  transform: scaleX(1.12);
+}
+
+/* on card hover (when hovering image) -> also expand the title underline */
+.workCard:hover .titleLink::after {
+  transform: scaleX(1.12);
+}
+
+/* case study overlay (centered, appears on hover) */
+.overlay {
+  position: absolute;
+  left: 50%;
+  bottom: 40%;
+  transform: translate(-50%, 10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* allow click to pass through unless button visible */
+  opacity: 0;
+  transition: opacity 220ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
+  z-index: 3;
+}
+
+/* actual clickable button */
+.caseBtn {
+  pointer-events: auto;
+  display: inline-block;
+  background: #111;
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+  transform: translateZ(0);
+}
+
+/* show overlay when card hovered */
+.workCard:hover .overlay,
+.imageWrap:focus-within .overlay {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+/* tweak overlay button for small screens */
+@media (max-width: 900px) {
+  .overlay { bottom: 8%; }
+  .caseBtn { padding: 8px 14px; font-size: 13px; }
+}
+
+/* desc uses color tweak already present in your module, but we keep spacing */
 .desc {
   margin: 8px 0 14px 0;
   color: rgba(0,0,0,0.62);

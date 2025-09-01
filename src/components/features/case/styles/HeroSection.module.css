@@ -1,0 +1,126 @@
+:root {
+  --hero-max-width: auto;
+  --accent: #d9372a;
+}
+
+/* The main hero section no longer has padding. It's just a container. */
+.hero {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+/* This container now ONLY holds text content.
+  - It has a max-width and is centered.
+  - Increased top padding for more space below the header.
+  - The top border is applied here.
+*/
+.inner {
+  /* This combination creates a consistent layout */
+  width: 100%;
+  max-width: calc(var(--hero-max-width) + 10vw); /* Content width + padding */
+  margin: 0 auto; /* Centers the container */
+  padding: 120px 5vw 80px 6vw; /* Consistent side padding */
+  box-sizing: border-box;
+  text-align: left; 
+
+  /* Add the border and other styles back */
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Kicker styling ("case study") */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #555;
+}
+
+.kickerDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* Main title styling */
+.title {
+  margin: 0 0 48px 0;
+  font-weight: 700;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Meta info grid (Domain, Platform, etc.) */
+.metaGrid {
+   /* Switched from Grid to Flexbox for better alignment control */
+  display: flex;
+  flex-wrap: wrap; /* Lets items wrap to the next line on smaller screens */
+  
+  /* Increased the horizontal gap to create space between the items */
+  gap: 20px 36px; 
+  
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.metaLabel {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+}
+.metaValue {
+  color: rgba(0, 0, 0, 0.95);
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+
+/* HERO IMAGE STYLING */
+/* FIXED: This container is now full-width.
+  - It has a fixed height, which is crucial for the image cropping.
+*/
+.heroMedia {
+  width: 100%; /* Stretches to the full viewport width */
+  height: 600px; /* Fixed height for the container */
+  margin: 0;
+  background: #f0f0f0; /* Fallback color while image loads */
+}
+
+/* FIXED: The <img> tag itself now covers the container.
+  - object-fit: cover zooms and crops the image to fit without distortion.
+*/
+.heroImg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover; /* This is the magic property! */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
+  .inner {
+    padding-top: 80px;
+  }
+  .heroMedia {
+    height: 450px; /* Adjust image height for smaller screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .metaGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .heroMedia {
+    height: 300px;
+  }
+}
