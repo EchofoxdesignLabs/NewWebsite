@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import styles from "./styles/Social.module.css";
+import Background from "../../Background/Background";
 
 /** Put your card data here */
 const CARDS = [
@@ -307,6 +308,7 @@ const sectionRef = useRef(null);
   return (
     <section ref={sectionRef} className={styles.section} style={{ height: `${pages * 100}vh` }}>
       <div ref={stickyRef} className={styles.sticky}>
+        <Background modelUrl="/assets/models/contour.glb" textureUrl="/marble-texture.webp" theme="light" />
         <div className={styles.header}>
           <p className={styles.kicker}>
             <span className={styles.dot} /> follow us

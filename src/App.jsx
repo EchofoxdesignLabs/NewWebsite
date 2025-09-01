@@ -59,6 +59,7 @@ import BootLoader from "./components/Preloader/BootLoader";
 import Home from "./pages/Home"; // EAGER import so canvases mount immediately
 import Work from "./pages/Work";
 import { ScrollProvider } from "./scroll/ScrollProvider";
+import VideoPreloader from "./components/Preloader/VideoPreloader";
 
 export default function App() {
   const [showreelReady, setShowreelReady] = useState(false);
@@ -72,8 +73,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               {/* Pass the onShowreelReady callback down */}
-              <Route index element={<Home onShowreelReady={() => setShowreelReady(true)} />} />
-              <Route path="/work" element={<Work onShowreelReady={() => setShowreelReady(true)} />} />
+              <Route index element={<Home />} />
+              <Route path="/work" element={<Work />} />
             </Route>
           </Routes>
         </Suspense>
@@ -85,6 +86,14 @@ export default function App() {
         videoSrc="/videos/loader.mp4"          // <-- replace with your loader video
         videoPoster="/videos/portal-empty.gif"
       />
+      {/*
+          NEW: This invisible component will start the showreel download
+          immediately and call setShowreelReady when it's done.
+        */}
+        <VideoPreloader
+          src="/videos/showreel.webm"
+          onReady={() => setShowreelReady(true)}
+        />
       </ScrollProvider>
     </>
   );

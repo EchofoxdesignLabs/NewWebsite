@@ -13,6 +13,7 @@ import gsap from "gsap";
 import styles from "./styles/Services.module.css";
 import { SERVICES_COLUMNS } from "./ServiceColumns";
 import Parallax from "../../../scroll/Parallax";
+import Background from "../../Background/Background";
 
 /* ---------- Shaders ---------- */
 const vertex = `
@@ -184,7 +185,9 @@ export default function ServicesSection() {
       onMouseMove={onMouseMove}
       onMouseLeave={handleLeave}
     >
+      
       <Parallax speed={-0.2}>
+        
       <div className={styles.inner}>
         <p className={styles.kicker}><span className={styles.dot} /> our services</p>
         <h2 className={styles.headline}>
