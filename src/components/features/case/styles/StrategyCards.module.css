@@ -1,0 +1,74 @@
+/* In StrategyCards.module.css */
+
+:root {
+  --strategy-section-max-width: 1440px;
+}
+
+/* Main container for the section.
+   It uses CSS Grid to create the three-column layout.
+*/
+.strategySection {
+  width: 100%;
+  max-width: calc(var(--strategy-section-max-width) + 10vw);
+  margin: 0 auto;
+  padding: 100px 5vw;
+  box-sizing: border-box;
+
+  display: grid;
+  /* Creates 3 equal columns on desktop, 1 on mobile */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px; /* Space between the cards */
+}
+
+/* Individual card styling */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Space between the image and text */
+}
+
+/* Image container styling.
+   - It's a positioning context and clips the zooming image.
+*/
+.imageContainer {
+  width: 100%;
+  aspect-ratio: 4 / 3; /* Gives the image a consistent shape */
+  border-radius: 16px;
+  overflow: hidden; /* This is crucial for the zoom effect */
+}
+
+/* The image itself */
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out; /* Smooth transition for the zoom */
+}
+
+/* The hover effect: scale the image up */
+.card:hover .image {
+  transform: scale(1.1);
+}
+
+/* Container for the text content */
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Space between the title and description */
+}
+
+/* Styling for the card title */
+.title {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  margin: 0;
+  color: #0a0a0a;
+}
+
+/* Styling for the card description */
+.description {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+}

@@ -147,7 +147,7 @@ export default function WorksGrid() {
             >
               <a
                 className={`${grid.imageWrap} ${styles.imageWrap}`}
-                href={p.href}
+                href={p.caseStudy}
                 aria-label={p.title}
               >
                 <img className={`${grid.image} ${styles.image}`} src={p.img} alt={p.title} />
@@ -155,9 +155,9 @@ export default function WorksGrid() {
                 {/* overlay button (shows only when caseStudy exists) */}
                 {p.caseStudy && (
                   <div className={styles.overlay}>
-                    <a className={styles.caseBtn} href={p.caseStudy}>
+                    <span className={styles.caseBtn} >
                       View Case Study
-                    </a>
+                    </span>
                   </div>
                 )}
               </a>
@@ -168,7 +168,7 @@ export default function WorksGrid() {
                 <h3 className={grid.title}>
                   <a
                     className={`${grid.titleLink} ${styles.titleLink}`}
-                    href={p.href}
+                    href={p.caseStudy}
                   >
                     {p.title}
                   </a>

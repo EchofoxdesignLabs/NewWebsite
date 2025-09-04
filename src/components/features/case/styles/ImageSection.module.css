@@ -1,0 +1,111 @@
+/* In ImageSection.module.css */
+
+:root {
+  --text-section-max-width: 1440px;
+}
+
+/* Main container for the section.
+   - It's a positioning context for the title.
+   - It has a fallback background color.
+*/
+.imageSection {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-start; /* Aligns title to the top */
+  justify-content: flex-start; /* Aligns title to the left */
+  background-color: transparent; /* Dark fallback color */
+  overflow: hidden; /* Ensures nothing spills out */
+}
+/* NEW: This is now the main container for the text overlay.
+   It handles the positioning, width, and padding.
+*/
+.textContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: calc(var(--text-section-max-width) + 10vw);
+  margin: 0 auto;
+  padding: 100px 5vw;
+  box-sizing: border-box;
+  
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Layout Variations --- */
+
+/* Default layout: title and description are stacked vertically */
+.singleColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Optional layout: title on the left, description on the right */
+.twoColumn {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  align-items: start;
+}
+
+/* The title class now ONLY handles typography */
+.title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  margin: 0;
+}
+/* NEW: Class for the description paragraph */
+.description {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 65ch; /* Improves readability by limiting line length */
+}
+
+/* The <picture> element is positioned absolutely to fill the entire section */
+.imageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Base image style WITHOUT object-fit */
+.image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* NEW: Modifier class to fill the container (crops the image) */
+.cover {
+  object-fit: cover;
+}
+
+/* NEW: Modifier class to fit the container (shows the full image) */
+.contain {
+  object-fit: contain;
+}
+
+/* --- NEW: Responsive Adjustments --- */
+@media (max-width: 768px) {
+    /* NEW: Make the section's height automatic on mobile */
+  .imageSection {
+    height: auto !important; /* Override the inline style from the prop */
+    aspect-ratio: 4 / 5;     /* Give it a pleasant, mobile-friendly shape */
+  }
+  .textContainer {
+    /* Reduce padding on smaller screens */
+    padding-top: 80px !important; /* Use !important to override inline style */
+    padding-bottom: 80px;
+  }
+  
+  /* On mobile, the two-column layout stacks into a single column */
+  .twoColumn {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

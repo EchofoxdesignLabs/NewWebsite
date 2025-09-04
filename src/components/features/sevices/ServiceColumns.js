@@ -8,7 +8,7 @@ export const SERVICES_COLUMNS = [
       { label: "UI/UX",        image: "/images/services/UI.jpg" },
       { label: "Website",      image: "/images/services/img1.jpg" },
       { label: "Mobile App",   image: "/images/services/img1.jpg" },
-      { label: "Design System",image: "/images/services/UI.jpg" },
+      { label: "Design System",image: "/images/services/Bern.jpg" },
     ],
   },
   {

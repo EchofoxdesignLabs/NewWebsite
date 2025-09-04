@@ -1,0 +1,164 @@
+/* In AboutSection.module.css */
+
+/* Define a max-width variable for this section */
+:root {
+  --about-max-width: auto;
+}
+
+/* Main container for the about section */
+.about {
+  padding-bottom: 100px;
+  background-color: #fff;
+  color: #0a0a0a;
+}
+
+/* Text container with consistent alignment */
+.textContainer {
+  width: 100%;
+  max-width: calc(var(--about-max-width) + 10vw);
+  margin: 0 auto;
+  padding: 100px 5vw 80px 5vw;
+  box-sizing: border-box;
+  display: flex;
+  gap: 20px 88px; 
+  align-items: start;
+}
+
+/* Styling for the "About" title */
+.title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Styling for the description paragraph */
+.description {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+}
+
+
+
+/* --- DEFAULT IMAGE GRID STYLES (NO OVERLAP) --- */
+
+.imageGrid {
+  width: 100%;
+  max-width: calc(var(--about-max-width) + 10vw);
+  margin: 0 auto;
+  padding: 0 5vw;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
+  gap: 24px;
+  height: 80vh;
+  max-height: 750px;
+}
+
+.imageGrid > .imageContainer:first-child {
+  flex: 1.2;
+}
+
+/* By default, the right column is a simple vertical stack */
+.rightColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* Simple gap between images */
+}
+
+.imageContainer {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 42px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* --- CONDITIONAL OVERLAP STYLES --- */
+
+/* These rules only apply when the .overlapLayout class is present */
+.overlapLayout .rightColumn {
+  position: relative;
+  display: block; /* Override flex */
+  gap: 0; /* Override gap */
+}
+
+.overlapLayout .imageTopRight {
+  position: absolute;
+  height: 39%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.overlapLayout .imageBottomRight {
+  position: absolute;
+  height: 80%;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  /* 1. Stack the "About" title and description vertically */
+  .textContainer {
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+  
+   /* 2. Stack the main image columns and let height become natural */
+  .imageGrid {
+    flex-direction: column;
+    height: auto;
+    gap: 24px;
+  }
+
+  /* 3. DEFAULT MOBILE LAYOUT: Right column is a simple stack with a gap */
+  .rightColumn {
+    display: flex;
+    flex-direction: column;
+    position: static;
+    gap: 24px;
+  }
+
+  /* 4. Reset the images for mobile flow */
+  .imageTopRight, .imageBottomRight {
+    position: static;
+    height: auto;
+    width: auto;
+  }
+  
+  /* 5. Give all images a consistent shape on mobile */
+  .imageContainer {
+    height: auto;
+    aspect-ratio: 4/3;
+  }
+
+  /* --- CONDITIONAL MOBILE OVERLAP --- */
+  
+  /* These rules ONLY apply for the "overlap" layout on mobile screens */
+  .overlapLayout .rightColumn {
+    display: block; /* Override the default flex behavior */
+    gap: 0;
+  }
+
+  .overlapLayout .imageBottomRight {
+    margin-top: -5rem; /* Creates the overlap. Adjust the value as needed. */
+    position: relative; /* Needed for z-index to work reliably */
+    z-index: 2;
+  }
+}

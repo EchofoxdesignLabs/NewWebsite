@@ -61,6 +61,9 @@ import Work from "./pages/Work";
 import { ScrollProvider } from "./scroll/ScrollProvider";
 import VideoPreloader from "./components/Preloader/VideoPreloader";
 const Airfrens_CaseStudy = React.lazy(() => import("./pages/case_studies/Airfrens"));
+const Kydlabs_CaseStudy = React.lazy(() => import("./pages/case_studies/Kydlabs"));
+const Stevie_CaseStudy = React.lazy(() => import("./pages/case_studies/StevieAwards"));
+const Cox_CaseStudy = React.lazy(() => import("./pages/case_studies/CoxNKings"));
 
 export default function App() {
   const [showreelReady, setShowreelReady] = useState(false);
@@ -77,6 +80,9 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path="/work" element={<Work />} />
               <Route path='/work/airfrens' element ={<Airfrens_CaseStudy />} />
+              <Route path='/work/kydlabs' element ={<Kydlabs_CaseStudy />} />
+              <Route path='/work/stevie_awards' element ={<Stevie_CaseStudy />} />
+              <Route path='/work/coxNkings' element ={<Cox_CaseStudy />} />
             </Route>
           </Routes>
         </Suspense>
