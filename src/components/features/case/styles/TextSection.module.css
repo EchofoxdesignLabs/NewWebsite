@@ -1,0 +1,77 @@
+/* In TextSection.module.css */
+
+:root {
+  --text-section-max-width: auto;
+}
+
+/* Main container for the section.
+   It uses CSS Grid to create the two-column layout.
+*/
+.textSection {
+  width: 100%;
+  max-width: calc(var(--text-section-max-width) + 10vw);
+  margin: 0 auto;
+  padding: 55px 5vw;
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Left column is half the width of the right */
+  gap: 10px;
+  align-items: start;
+}
+
+/* Styling for the main title in the left column (e.g., "Challenge") */
+.title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  margin: 0;
+  color: #0a0a0a;
+}
+
+/* The content container now sits in the second column by default */
+.contentContainer {
+  grid-column: 2 / 3; /* Places it in the right-hand column */
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+/* NEW: This class makes the content container span the ENTIRE grid width */
+.contentContainer.fullWidth {
+  grid-column: 1 / -1; /* Spans all columns, from the first line to the last */
+}
+
+/* Styling for each individual item's subtitle */
+.subtitle {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  margin: 0 0 12px 0; /* Space below the subtitle */
+  color: #0a0a0a;
+}
+
+/* Styling for the description paragraph */
+.description {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.7;
+  color: #333;
+  margin: 0;
+}
+.highlight {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #0a0a0a;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .textSection {
+    /* On smaller screens, stack the columns into a single vertical layout */
+    grid-template-columns: 1fr;
+    gap: 40px; /* Space between the title and the content block */
+    padding: 80px 5vw;
+  }
+  /* On mobile, the content always starts in the first column */
+  .contentContainer {
+    grid-column: 1 / -1;
+  }
+}

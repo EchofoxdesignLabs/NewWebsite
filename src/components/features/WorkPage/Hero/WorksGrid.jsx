@@ -141,16 +141,35 @@ export default function WorksGrid() {
         {/* --- Grid (reusing Blogs card styles) --- */}
         <div ref={gridRef} className={grid.grid}>
           {filtered.map((p) => (
-            <article key={p.id} className={grid.card}>
-              <a className={grid.imageWrap} href={p.href} aria-label={p.title}>
-                <img className={grid.image} src={p.img} alt={p.title} />
+            <article
+              key={p.id}
+              className={`${grid.card} ${styles.workCard}`} /* add our local workCard */
+            >
+              <a
+                className={`${grid.imageWrap} ${styles.imageWrap}`}
+                href={p.caseStudy}
+                aria-label={p.title}
+              >
+                <img className={`${grid.image} ${styles.image}`} src={p.img} alt={p.title} />
+
+                {/* overlay button (shows only when caseStudy exists) */}
+                {p.caseStudy && (
+                  <div className={styles.overlay}>
+                    <span className={styles.caseBtn} >
+                      View Case Study
+                    </span>
+                  </div>
+                )}
               </a>
 
               <div className={grid.body}>
                 <div className={grid.category}>{p.category}</div>
 
                 <h3 className={grid.title}>
-                  <a className={grid.titleLink} href={p.href}>
+                  <a
+                    className={`${grid.titleLink} ${styles.titleLink}`}
+                    href={p.caseStudy}
+                  >
                     {p.title}
                   </a>
                 </h3>

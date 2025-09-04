@@ -8,7 +8,10 @@ export const WORKS = [
     description:
       "Built for the top performing DJs, Promoters, Venues, Festivals and Artists.",
     img: "/images/blogs/img1.jpg",
+    date: "Jun 20, 2023",
+    read: "12 mins read",
     href: "#",
+    caseStudy: "/work/kydlabs"
   },
   {
     id: "airfrens",
@@ -17,7 +20,10 @@ export const WORKS = [
     description:
       "A social web3 dating app reimagining discovery and connection from scratch.",
     img: "/images/blogs/img1.jpg",
+    date: "Jun 20, 2023",
+    read: "12 mins read",
     href: "#",
+    caseStudy: "/work/airfrens"
   },
   {
     id: "stevie",
@@ -26,7 +32,22 @@ export const WORKS = [
     description:
       "Advanced monitoring and admin tools for large-scale award operations.",
     img: "/images/blogs/img1.jpg",
+    date: "Jun 20, 2023",
+    read: "12 mins read",
     href: "#",
+    caseStudy: "/work/stevie_awards"
+  },
+  {
+    id: "cox",
+    category: "digital product",
+    title: "Cox and Kings",
+    description:
+      "Digitialization of one of the worlds oldest travel agency",
+    img: "/images/blogs/img1.jpg",
+    date: "Jun 20, 2023",
+    read: "12 mins read",
+    href: "#",
+    caseStudy: "/work/coxNkings"
   },
 
   {
@@ -36,6 +57,8 @@ export const WORKS = [
     description:
       "Real-time dashboards and fan experiences for live events.",
     img: "/images/blogs/img1.jpg",
+    date: "Jun 20, 2023",
+    read: "12 mins read",
     href: "#",
   },
   {
@@ -45,6 +68,8 @@ export const WORKS = [
     description:
       "An immersive game prototype with stylized motion and audio design.",
     img: "/images/blogs/img1.jpg",
+    date: "Jun 20, 2023",
+    read: "12 mins read",
     href: "#",
   },
 
@@ -55,6 +80,8 @@ export const WORKS = [
     description:
       "Exploration of forms and finishes for a modern seating line.",
     img: "/images/blogs/img1.jpg",
+    date: "Jun 20, 2023",
+    read: "12 mins read",
     href: "#",
   },
   {
@@ -64,6 +91,8 @@ export const WORKS = [
     description:
       "Physical product UX married with e-commerce storytelling.",
     img: "/images/blogs/img1.jpg",
+    date: "Jun 20, 2023",
+    read: "12 mins read",
     href: "#",
   },
 ];
