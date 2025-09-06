@@ -5,6 +5,8 @@ import AboutSection from "../../components/features/case/AboutSection";
 import TextSection from "../../components/features/case/TextSection";
 import ImageSection from "../../components/features/case/ImageSection";
 import StrategyCards from "../../components/features/case/StrategyCards";
+import OtherWorks from "../../components/features/case/OtherWorksSection";
+import { getOtherWorks } from "../../utils/getOtherWorks";
 
 
 // local assets (public/images or import depending on your bundler)
@@ -83,6 +85,11 @@ const processImages3 = {
   desktop: "/images/case-kydlabs/KL07.png", // A wider image for desktop
   mobile: "/images/case-kydlabs/KL07.png",   // A taller image for mobile
 };
+const processImages4 = {
+  desktop: "/images/case-kydlabs/KL08.jpg", // A wider image for desktop
+  mobile: "/images/case-kydlabs/KL08.jpg",   // A taller image for mobile
+};
+
 export default function Kydlabs() {
   const meta = [
     { label: "Domain", value: "Web 3" },
@@ -90,7 +97,7 @@ export default function Kydlabs() {
     { label: "Service", value: "UI/UX Design, Visual Design and Strategy" },
     { label: "Client", value: "Kydlabs" },
   ];
-
+  const otherWorksPosts = getOtherWorks('kydlabs', 3);
   return (
     <main>
       <HeroSection
@@ -157,6 +164,15 @@ export default function Kydlabs() {
       <TextSection
         title="Final Output"
         contentItems={strategyText3}
+      />
+      <ImageSection
+        imageSources={processImages4}
+        alt="A diagram showing the research, strategy, and design process."
+        height={600} // This will make it fill the entire screen height
+        objectFit = "cover"
+      />
+      <OtherWorks
+        posts={otherWorksPosts}
       />
     </main>
   );

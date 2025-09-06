@@ -4,6 +4,8 @@ import HeroSection from "../../components/features/case/HeroSection";
 import AboutSection from "../../components/features/case/AboutSection";
 import TextSection from "../../components/features/case/TextSection";
 import ImageSection from "../../components/features/case/ImageSection";
+import OtherWorks from "../../components/features/case/OtherWorksSection";
+import { getOtherWorks } from "../../utils/getOtherWorks";
 
 
 // local assets (public/images or import depending on your bundler)
@@ -41,6 +43,17 @@ const designText = [
     description:"The design featured a clean, modern interface with enhanced navigation and consistent branding. Key screens, including entry forms and award descriptions, were prototyped with a strong focus on clarity, accessibility, and responsiveness. Continuous feedback ensured alignment with user and business needs, while responsive design guaranteed smooth interaction across all touchpoints."
   }
 ];
+const wireframesText = [
+  {
+    subtitle:"Wireframes",
+    description:"Wireframes mapped key user flows, including a universal entry point tailored to all user personas. They established clear navigation, content hierarchy, and responsive layouts. Early feedback helped refine the structure before progressing to high-fidelity designs."
+  }
+];
+const outputText = [
+  {
+    description:"The redesign delivered a polished, user-friendly digital experience featuring streamlined navigation, a unified brand identity, and optimized workflows for entrants and judges. The responsive design ensured accessibility across devices, while improved content structure enhanced clarity and engagement. The project resulted in higher user satisfaction, increased participation rates, and positive feedback from stakeholders, demonstrating a successful alignment of business goals with user needs."
+  }
+];
 const processImages1 = {
   desktop: "/images/case-stevieawards/SA 06.png", // A wider image for desktop
   mobile: "/images/case-stevieawards/SA 06.png",   // A taller image for mobile
@@ -57,6 +70,26 @@ const processImages4 = {
   desktop: "/images/case-stevieawards/SA 08.jpg", // A wider image for desktop
   mobile: "/images/case-stevieawards/SA 08.jpg",   // A taller image for mobile
 };
+const processImages5 = {
+  desktop: "/images/case-stevieawards/SA 09.png", // A wider image for desktop
+  mobile: "/images/case-stevieawards/SA 09.png",   // A taller image for mobile
+};
+const processImages6 = {
+  desktop: "/images/case-stevieawards/SA 10.png", // A wider image for desktop
+  mobile: "/images/case-stevieawards/SA 10.png",   // A taller image for mobile
+};
+const processImages7 = {
+  desktop: "/images/case-stevieawards/SA 11.png", // A wider image for desktop
+  mobile: "/images/case-stevieawards/SA 11.png",   // A taller image for mobile
+};
+const processImages8 = {
+  desktop: "/images/case-stevieawards/SA 12.png", // A wider image for desktop
+  mobile: "/images/case-stevieawards/SA 12.png",   // A taller image for mobile
+};
+const processImages9 = {
+  desktop: "/images/case-stevieawards/SA 13.png", // A wider image for desktop
+  mobile: "/images/case-stevieawards/SA 13.png",   // A taller image for mobile
+};
 export default function StevieAwards() {
   const meta = [
     { label: "Domain", value: "Web 3" },
@@ -64,7 +97,7 @@ export default function StevieAwards() {
     { label: "Service", value: "UI/UX Design, Visual Design and Strategy" },
     { label: "Client", value: "Airfrens" },
   ];
-
+  const otherWorksPosts = getOtherWorks('stevie', 3);
   return (
     <main>
       <HeroSection
@@ -132,6 +165,46 @@ export default function StevieAwards() {
       <TextSection
         title="Design Excecution"
         contentItems={designText}
+      />
+      <ImageSection
+        imageSources={processImages5}
+        alt="A diagram showing the research, strategy, and design process."
+        height={100} // This will make it fill the entire screen height
+        objectFit = "cover"
+      />
+      <TextSection
+        contentItems={wireframesText}
+      />
+      <ImageSection
+        imageSources={processImages6}
+        alt="A diagram showing the research, strategy, and design process."
+        height={100} // This will make it fill the entire screen height
+        objectFit = "cover"
+      />
+      <TextSection
+        title="The Output"
+        contentItems={outputText}
+      />
+      <ImageSection
+        imageSources={processImages7}
+        alt="A diagram showing the research, strategy, and design process."
+        height={80} // This will make it fill the entire screen height
+        objectFit = "cover"
+      />
+      <ImageSection
+        imageSources={processImages8}
+        alt="A diagram showing the research, strategy, and design process."
+        height={100} // This will make it fill the entire screen height
+        objectFit = "cover"
+      />
+      <ImageSection
+        imageSources={processImages9}
+        alt="A diagram showing the research, strategy, and design process."
+        height={80} // This will make it fill the entire screen height
+        objectFit = "cover"
+      />
+      <OtherWorks
+        posts={otherWorksPosts}
       />
     </main>
   );
