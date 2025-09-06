@@ -60,7 +60,7 @@
   font-size: clamp(1rem, 2vw, 1.125rem);
   line-height: 1.7;
   margin: 0;
-  max-width: 65ch; /* Improves readability by limiting line length */
+  max-width: 40ch; /* Improves readability by limiting line length */
 }
 
 /* The <picture> element is positioned absolutely to fill the entire section */
